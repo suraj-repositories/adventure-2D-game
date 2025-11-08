@@ -1,5 +1,9 @@
 package main;
 
+import java.awt.Image;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Main {
@@ -11,6 +15,14 @@ public class Main {
 		window.setResizable(false);
 		window.setTitle("2D Adventure");
 
+		try {
+			Image icon = ImageIO.read(Main.class.getResourceAsStream("/objects/key.png"));
+			window.setIconImage(icon);
+		} catch (IOException e) {
+			System.out.println("Icon image not found!");
+			e.printStackTrace();
+		}
+
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
 
@@ -21,7 +33,5 @@ public class Main {
 
 		gamePanel.setupGame();
 		gamePanel.startGameThread();
-
 	}
-
 }
